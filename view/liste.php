@@ -9,7 +9,8 @@
     <title>Liste de courses</title>
 </head>
 <body>
-<div class="container mt-2">
+<div class="container">
+<div class="shoppingList">
 
 <?php if (!empty($_SESSION['flash_message'])): ?>
 
@@ -26,14 +27,14 @@
 <?php endif; ?>
 
 
-    <div class="row submit-button">
+    <div class="row submit-button ">
 
-        <div class="col-sm-12 shadow p-3 mb-3 bg-white rounded">
+        <div class="col-sm-12 shadow p-3 mb-3 bg-primary rounded">
         <form action="" method="post">
             <div class="input-group mt-4">
-                <input type="text" class="form-control" placeholder="article" aria-label="Recipient's username" aria-describedby="button-addon2" name="item">
+                <input type="text" class="form-control" placeholder="achat" aria-label="Recipient's username" aria-describedby="button-addon2" name="item">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary bg-primary" type="submit" id="button-addon2" ><i class="fas fa-save text-white"></i></button>
+                    <button class="btn btn-outline-primary bg-primary" type="submit" id="button-addon2" ><i class="fas fa-save text-white"></i></button>
                 </div>
             </div>
             </form>
@@ -41,7 +42,7 @@
     </div>
 
 
-    <div class="row liste-courses mt-4 shadow p-3 mb-5 bg-white rounded">
+    <div class="row liste-courses shadow p-3 mb-5 bg-white rounded">
         <div class="col-sm-12">
         
             <ul class="list-group">
@@ -58,6 +59,44 @@
                 <?php endforeach; ?>
             </ul>
         </div>
+    </div>
+
+    </div>
+
+    <div class="TodoList">
+
+        <div class="row submit-button">
+
+<div class="col-sm-12 shadow p-3 mb-3 bg-primary rounded">
+<form action="" method="post">
+    <div class="input-group mt-4">
+        <input type="text" class="form-control" placeholder="todo !!" aria-label="Recipient's username" aria-describedby="button-addon2" name="task">
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary bg-primary " type="submit" id="button-addon2" ><i class="fas fa-save text-white"></i></button>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+
+    <div class="row liste-todo mt-4 shadow p-3 mb-5 bg-white rounded">
+        <div class="col-sm-12">
+        
+            <ul class="list-group">
+                <?php foreach ($todoList as $todoItem): ?>
+                <li class="list-group-item"><?= $todoItem['task']; ?>
+                    <a href="?taskDelete=<?= $todoItem['pk_todo'];?>">
+                        <button type="submit" class="btn btn-dark ml-4">
+                            <i class="fas fa-trash-alt">
+                            </i>
+                        </button>
+                    </a>
+                </li>
+        
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
     </div>
 </div>
 

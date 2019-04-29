@@ -9,40 +9,14 @@ require __DIR__.'/inc/db.php'; // Pour __DIR__ => http://php.net/manual/fr/langu
 
 // Initialisation de variables (évite les "NOTICE - variable inexistante")
 $shoppingList = array();
+$todoList = array();
+$task = '';
 $name = '';
 
 // Si le formulaire a été soumis
-if (!empty($_POST)) {
+if (!empty($_POST['item'])) {
     // Récupération des valeurs du formulaire dans des variables
     $name = isset($_POST['item']) ? $_POST['item'] : '';
-    
-
-    // TODO (optionnel) valider les données reçues (ex: donnée non vide)
-    // --- START OF YOUR CODE ---
-
-    // Je part du principe qu'il n'y a pas d'erreurs
-    $has_error = false;
-
-    if (empty($name)) {
-
-        $_SESSION['flash_message'][] = array('type' => 'danger', 'text' => 'Merci de renseigner un article');
-        $has_error = true;
-    }
-
-
-    if ($has_error) {
-
-        // J'indique à PHP qu'il va falloir faire une redirection
-        header('Location: ./index.php');
-        // Puis j'arrete PHP
-        die();
-    }
-
-    // --- END OF YOUR CODE ---
-
-    // TODO exécuter la requête qui insère les données
-    // TODO une fois inséré, faire une redirection vers la page "index.php" (fonction header)
-    // --- START OF YOUR CODE ---
 
     $inserted = insertItem($pdo, $name);
 
@@ -50,21 +24,12 @@ if (!empty($_POST)) {
     if (!empty($inserted)) {
 
         $_SESSION['flash_message'][] = array('type' => 'success', 'text' => 'c\'est tout bon!');
-
-    // Si il est vide...
-    // sous entendu: $inserted === 0
-    // sous entendu: $inserted === false
-    } else {
-
-        $_SESSION['flash_message'][] = array('type' => 'danger', 'text' => 'Un problème est survenu merci de reessayer');
     }
 
-    // J'indique à PHP qu'il va falloir faire une redirection
     header('Location: ./index.php');
     // Puis j'arrete PHP
     die();
 
-    // --- END OF YOUR CODE ---
 }
 
 if (!empty($_GET['articleDelete'])) {
@@ -79,14 +44,42 @@ if (!empty($_GET['articleDelete'])) {
 
 
 
+if (!empty($_POST['task'])) {
+        // Récupération des valeurs du formulaire dans des variables
+    $task = isset($_POST['task']) ? $_POST['task'] : '';
 
+    $inserted_task = insertTask($pdo, $task);
+
+    // Si inserted n'est pas vide...
+    if (!empty($inserted_task)) {
+
+        $_SESSION['flash_message'][] = array('type' => 'success', 'text' => 'yeah...');
+
+    // Si il est vide...
+    // sous entendu: $inserted === 0
+    // sous entendu: $inserted === false
+    }
+
+    header('Location: ./index.php');
+    // Puis j'arrete PHP
+    die();
+
+    // --- END OF YOUR CODE ---
+}
+
+if (!empty($_GET['taskDelete'])) {
+
+    $task_id = $_GET['taskDelete'];
+
+    deleteTask($pdo, $task_id);
+
+    header('Location: ./index.php');
+
+}
 // --- END OF YOUR CODE ---
-
-
 
 $shoppingList = getShoppingList($pdo);
-
-// --- END OF YOUR CODE ---
+$todoList = getTodoList($pdo);
 
 // Inclusion du fichier s'occupant d'afficher le code HTML
 // Je fais cela car mon fichier actuel est déjà assez gros, donc autant le faire ailleurs (pas le métier hein ! ;) )

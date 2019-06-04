@@ -9,7 +9,7 @@
     <title>Liste de courses</title>
 </head>
 <body>
-<div class="container">
+<div class="container mt-4">
 <div class="shoppingList">
 
 <?php if (!empty($_SESSION['flash_message'])): ?>
@@ -34,7 +34,7 @@
             <div class="input-group mt-4">
                 <input type="text" class="form-control" placeholder="achat" aria-label="Recipient's username" aria-describedby="button-addon2" name="item">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-primary bg-primary" type="submit" id="button-addon2" ><i class="fas fa-save text-white"></i></button>
+                    <button class="btn btn-success" type="submit" id="button-addon2" ><i class="fas fa-cart-arrow-down text-white font-weight-bolder"></i></button>
                 </div>
             </div>
             </form>
@@ -72,14 +72,14 @@
     <div class="input-group mt-4">
         <input type="text" class="form-control" placeholder="todo !!" aria-label="Recipient's username" aria-describedby="button-addon2" name="task">
         <div class="input-group-append">
-            <button class="btn btn-outline-primary bg-primary " type="submit" id="button-addon2" ><i class="fas fa-save text-white"></i></button>
+            <button class="btn btn-success " type="submit" id="button-addon2" ><i class="fas fa-save text-white"></i></button>
         </div>
     </div>
     </form>
 </div>
 </div>
 
-    <div class="row liste-todo mt-4 shadow p-3 mb-5 bg-white rounded">
+    <div class="row liste-todo shadow p-3 mb-5 bg-white rounded">
         <div class="col-sm-12">
         
             <ul class="list-group">
